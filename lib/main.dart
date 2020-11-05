@@ -17,7 +17,7 @@ class Ratatouille extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SearchPage(title: 'SSS'),
+      home: SearchPage(title: 'Ratatouille'),
       debugShowCheckedModeBanner: false,
     );
   }
