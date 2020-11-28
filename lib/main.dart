@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:ratatouille/login/login.dart';
 
 void main() async {
   await DotEnv().load('.env');
@@ -19,7 +20,7 @@ class Ratatouille extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SearchPage(title: 'Ratatouille'),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
