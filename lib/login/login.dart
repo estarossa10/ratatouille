@@ -9,8 +9,21 @@ class _SearchFormState extends State<LoginPage> {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
+      backgroundColor: Colors.white,
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              height: 400,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/background.png"),
+                  fit: BoxFit.fill
+                )
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

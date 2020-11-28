@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:ratatouille/search_page/search.dart';
+import 'package:ratatouille/login/login.dart';
+// import 'package:ratatouille/search_page/search.dart';
 
 void main() async {
   await DotEnv().load('.env');
@@ -18,7 +19,7 @@ class Ratatouille extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SearchPage(title: 'Ratatouille'),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
