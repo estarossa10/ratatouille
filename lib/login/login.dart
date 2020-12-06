@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -19,133 +20,140 @@ class _SearchFormState extends State<LoginPage> {
       backgroundColor: Colors.white,
       body: Container(
         child: SingleChildScrollView(
-          child: Column(
+          child: Stack(
             children: [
               Container(
                 width: size.width,
-                height: size.height * 0.35,
+                height: size.height,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/background.png"),
-                      // fit: BoxFit.fill
+                      image: AssetImage('assets/images/background.png'),
+                      fit: BoxFit.fitWidth,
                     )
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(30),
-                child: Column(
-                  children: [
-                    Form(
-                      key: _formkey,
-                      child: Container(
-                        width: size.width * 0.8,
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(color: Colors.red)
-                                  )
-                              ),
-                              child: TextFormField(
-                                onSaved: (input) {_email = input;},
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Email',
-                                    hintStyle: TextStyle(color: Colors.grey)
-                                ),
-                                validator: (input) {
-                                  if(input.isEmpty) return 'Please provide an email';
-                                  // if(!input.contains(RegExp(r'@'))) return 'Please provide an email';
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(color: Colors.red)
-                                  )
-                              ),
-                              child: TextFormField(
-                                onSaved: (input) {_password = input;},
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Password',
-                                    hintStyle: TextStyle(color: Colors.grey)
-                                ),
-                                obscureText: true,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: Column(
-                  children: [
-                    Container(
-                      width: size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                      ),
+              Container(
+                width: size.width,
+                height: size.height,
+                alignment: Alignment.bottomCenter,
+                child: Form(
+                  key: _formkey,
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    width: size.width * 0.8,
+                    height: size.height,
+                    padding: EdgeInsets.all(5),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: size.height * 0.55, bottom: 5.0),
                       child: Column(
                         children: [
                           Container(
-                            width: size.width * 0.8,
-                            child: RawMaterialButton(
-                              onPressed: () {logIn();},
-                              fillColor:  Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(color: Colors.red)
+                                )
+                            ),
+                            child: TextFormField(
+                              onSaved: (input) {_email = input;},
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Email',
+                                  hintStyle: TextStyle(color: Colors.white)
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Text(
-                                  'LOGIN',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
+                              validator: (input) {
+                                if(input.isEmpty) return 'Please provide an email';
+                                // if(!input.contains(RegExp(r'@'))) return 'Please provide an email';
+                                return null;
+                              },
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(color: Colors.red)
+                                )
+                            ),
+                            child: TextFormField(
+                              onSaved: (input) {_password = input;},
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Password',
+                                  hintStyle: TextStyle(color: Colors.white)
+                              ),
+                              obscureText: true,
+                            ),
+                          )
+                        ],
+                      )
+                    )
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(5),
+                child: Container(
+                  width: size.width,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: size.height * 0.80),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: size.width * 0.8,
+                          child: RawMaterialButton(
+                            onPressed: () {logIn();},
+                            fillColor:  Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Text(
+                                'LOGIN',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
                                 ),
                               ),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 25),
-                            width: size.width * 0.8,
-                            child: RawMaterialButton(
-                              onPressed: () {/*TODO go to register page*/ },
-                              fillColor:  Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Text(
-                                  'REGISTER',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
+                      ],
+                    )
+                  )
+                )
+              ),
+              Container(
+                width: size.width,
+                height: size.height,
+                child: Padding(
+                  padding: EdgeInsets.only(top: size.height * 0.95, left: size.width * 0.025),
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Don't Have an Account?",
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                      recognizer: TapGestureRecognizer() //TODO ke register
+                        ..onTap = () {}
+                    ),
+                  )
+                ),
+              ),
+              Container(
+                width: size.width,
+                height: size.height,
+                child: Padding(
+                    padding: EdgeInsets.only(top: size.height * 0.95, left: size.width * 0.68),
+                    child: RichText(
+                      text: TextSpan(
+                          text: "Login with Google",
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                          recognizer: TapGestureRecognizer() //TODO login google
+                            ..onTap = () {}
                       ),
                     )
-                  ],
                 ),
               )
             ],
