@@ -166,16 +166,26 @@ class _SearchFormState extends State<LoginPage> {
   Future<void> logIn() async {
     final formState = _formkey.currentState;
 
-    if(formState.validate()){
-      formState.save();
-      try{
-        User user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password)) as User;
-        print(user.email);
-        //TODO go to search page
-      }catch(e){
-        print(e.message);
+    if(formState.validate()) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _email,
+            password: _password
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+          print('Wrong password or user not exist!');
+        }
       }
     }
-  }
-
+    // if(formState.validate()){
+    //   formState.save();
+    //   try{
+    //     User user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password)) as User;
+    //     print(user.email);
+    //     //TODO go to search page
+    //   }catch(e){
+    //     print(e.message);
+    //   }
+    }
 }
