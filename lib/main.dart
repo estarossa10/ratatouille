@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:ratatouille/loading/loading_screen.dart';
 import 'package:ratatouille/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:ratatouille/search_page/search.dart';
@@ -21,11 +22,6 @@ class Ratatouille extends StatelessWidget {
       // Initialize FlutterFire:
       future: _initialization,
       builder: (context, snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          print('error happened');
-        }
-
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
@@ -36,11 +32,11 @@ class Ratatouille extends StatelessWidget {
             ),
             home: LoginPage(),
             debugShowCheckedModeBanner: false,
-          );;
+          );
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        print('null');
+        return MaterialApp(home: LoadingScreen(),);
       },
     );
   }
