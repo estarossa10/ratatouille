@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:ratatouille/loading/loading_screen.dart';
-import 'package:ratatouille/login/login.dart';
+import 'package:ratatouille/screens/loading/loading_screen.dart';
+import 'package:ratatouille/screens/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:ratatouille/search_page/search.dart';
+// import 'package:ratatouille/screens.search_page/search.dart';
 
 void main() async {
   await DotEnv().load('.env');
