@@ -16,11 +16,11 @@ class DatabaseProvider {
       return _database;
     }
 
-    _database = await InitDB();
+    _database = await initDB();
     return _database;
   }
 
-  InitDB() async {
+  initDB() async {
     return await openDatabase(
       join(await getDatabasesPath(), 'database.db'),
       readOnly: true
