@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ratatouille/controller/user_controller.dart';
+import 'package:ratatouille/models/users.dart';
 
 class LoginPage extends StatefulWidget{
   @override
@@ -165,27 +167,15 @@ class _SearchFormState extends State<LoginPage> {
 
   Future<void> logIn() async {
     final formState = _formkey.currentState;
+    formState.save();
 
     if(formState.validate()) {
       try {
-        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: _email,
-            password: _password
-        );
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-          print('Wrong password or user not exist!');
-        }
+        UserController.login(_email, _password);
+        // print(_email);
+      } on Exception catch (e) {
+        print(e.toString());
       }
     }
-    // if(formState.validate()){
-    //   formState.save();
-    //   try{
-    //     User user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password)) as User;
-    //     print(user.email);
-    //     //TODO go to search page
-    //   }catch(e){
-    //     print(e.message);
-    //   }
-    }
+  }
 }

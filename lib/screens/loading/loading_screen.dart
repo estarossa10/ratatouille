@@ -22,7 +22,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               height: size.height,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/screens.loading.png'),
+                    image: AssetImage('assets/images/loading.png'),
                     fit: BoxFit.fitWidth,
                   )
               ),
